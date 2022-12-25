@@ -1,6 +1,7 @@
-import mongodb from "mongodb"
-const ObjectId = mongodb.ObjectId
-let restaurants
+import mongodb from "mongodb";
+const ObjectId = mongodb.ObjectId;
+
+let restaurants;
 
 export default class restaurantsDAO {
   static async injectDB(conn) {
@@ -39,7 +40,7 @@ export default class restaurantsDAO {
     try {
       cursor = await restaurants.find(query);
     } catch (e) {
-      console.error('Unable to issue find command ' + e);
+      console.error("Unable to issue find command " + e);
       return { restaurantsList: [], totalNumRestaurants: 0 };
     }
 
@@ -54,7 +55,7 @@ export default class restaurantsDAO {
       return { restaurantsList, totalNumRestaurants };
     } catch (e) {
       console.error(
-        'Unable to convert cursor to array or problem counting documents ' + e
+        "Unable to convert cursor to array or problem counting documents " + e
       );
       return { restaurantsList: [], totalNumRestaurants: 0 };
     }
@@ -98,7 +99,7 @@ export default class restaurantsDAO {
       ];
       return await restaurants.aggregate(pipeline).next();
     } catch (e) {
-      console.error('Something went wrong in getRestaurantByID: ' + e);
+      console.error("Something went wrong in getRestaurantByID: " + e);
       throw e;
     }
   }
@@ -109,7 +110,7 @@ export default class restaurantsDAO {
       cuisines = await restaurants.distinct("cuisine");
       return cuisines;
     } catch (e) {
-      console.error('Unable to get cuisines' + e);
+      console.error("Unable to get cuisines" + e);
       return cuisines;
     }
   }
